@@ -1,19 +1,36 @@
-spcs
-====
+psg
+===
 
-A package to check the status of complaints recorded with Sindh Police.
+A package to check the Bills and Tariff of Pakistan's SUI Gas companies.
 
 
 Details
 -------
 
-Taps into the Sindh Police Complaints database.
+Uses the Pakistan SUI gas web resource.
 
 Package Usage
 -------------
 
-import spcs 
+import psg
 
-\# check complaint
+\# Show Bill Types
 
-spcs.check_complaint(1)
+bill_types = psg.show_types()
+
+
+\# Bill Retrieval
+
+bill_object = psg.get_bill(<bill_type>, <some_bill_umber>)
+
+
+\# Bill to JSON Conversion
+
+json_bill = psg.bill_to_json(<bill_object>)
+
+
+\# Formatted Bill Printing
+
+psg.print_bill(json_bill)
+
+
