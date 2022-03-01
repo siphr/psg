@@ -1,28 +1,29 @@
 # Maintainer: siphr <archlinux@techtum.dev>
-pkgname=spcs
+pkgname=psg
 pkgver=0.0
-pkgrel=1
-pkgdesc="Pakistan Sindh Police Complaints Status."
+pkgrel=2
+pkgdesc="Pakistan SUI Gass Bill and Tariff."
 depends=(python)
 arch=(x86_64)
-source=("https://github.com/siphr/spcs.git")
-url=https://www.techtum.dev/work-spcs-220121.html
+source=("https://github.com/siphr/psg.git")
+url=https://www.techtum.dev/work-psg-220228.html
 license=('MIT')
 
 build() {
     echo "PREPARING..."
-    pip install spcs 
+    pip install psg
     
-    echo "echo BUILD DATE: `date`" > spcs
-    echo "python -m spcs \$@" >> spcs
+    echo "echo BUILD DATE: `date`" > psg
+    echo "python -m psg \$@" >> psg
 
-    chmod +x $srcdir/spcs
+    chmod +x $srcdir/psg
 }
 
 package() {
     echo "INSTALLING..."
     mkdir -p $pkgdir/usr/bin
-    cp "$srcdir/spcs" "$pkgdir/usr/bin/spcs"
-    echo 'Finished setting up spcs.'
+    cp "$srcdir/psg" "$pkgdir/usr/bin/psg"
+    echo 'Finished setting up psg.'
 }
+
 md5sums=('SKIP')

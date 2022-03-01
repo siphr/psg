@@ -13,7 +13,10 @@ _URLS = {
 
 _DATA = { 'ref': None }
 
-def show_types():
+def print_tariff():
+    pass
+
+def print_types():
     print('\033[4mTYPES OF PAKISTAN SUI GAS BILLS\033[0m')
     for k,v in _URLS.items():
         print('{}: {}'.format(k, v))
@@ -52,8 +55,9 @@ def print_bill(bill):
 
 if __name__ == '__main__':
 
-    parser = argparse.ArgumentParser(description=' Pakistan Sui Gas Bills.')
-    parser.add_argument('-t', '--types', required=False, action='store_true', help='Show bill types.')
+    parser = argparse.ArgumentParser(description='Pakistan Sui Gas Bills and Tariff.')
+    parser.add_argument('-t', '--tariff', required=False, action='store_true', help='Show tariff.')
+    parser.add_argument('-b', '--bill_types', required=False, action='store_true', help='Show bill types.')
     parser.add_argument('-c', '--check_bill', required=False, dest='bill_type', metavar='T', help='Check bill type.')
     parser.add_argument('-n', '--number', required=False, dest='bill_no', metavar='N', help='Specify the bill/customer number.')
     a = parser.parse_args()
@@ -66,7 +70,9 @@ if __name__ == '__main__':
 
         bill_json = bill_to_json(bill)
         print_bill(bill_json)
-    elif a.types:
-        show_types()
+    elif a.bill_types:
+        print_types()
+    elif a.tariff:
+        raise Exception('Not yet implemented.')
 
 
