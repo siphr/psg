@@ -26,6 +26,7 @@ def get_bill(type, number):
 
     if type not in _URLS.keys(): raise Exception('Unknown bill type.')
 
+    import ipdb; ipdb.set_trace()
     res = r.post(_URLS.get(type), _DATA)
     if res.ok:
         html = bs(res.content, 'html.parser')
@@ -38,9 +39,13 @@ def get_bill(type, number):
 
 def bill_to_json(bill):
     bill_json = {}
+    
+    all_divs = bill.find_all('div')
+
+    if len(all_divs) < 2: raise Exception("No bills found. Please try again!")
     for i in range(1, 20, 3):
-        f = bill.find_all("div")[i].text.strip()[:-1].lower()
-        v = bill.find_all("div")[i+1].text.strip().upper()
+        f = all_divs[i].text.strip()[:-1].lower()
+        v = all_divs[i+1].text.strip().upper()
         #print(i, f, i+1, v, '--')
         bill_json.update({f:v})
     
@@ -59,7 +64,7 @@ if __name__ == '__main__':
     parser.add_argument('-t', '--tariff', required=False, action='store_true', help='Show tariff.')
     parser.add_argument('-b', '--bill_types', required=False, action='store_true', help='Show bill types.')
     parser.add_argument('-c', '--check_bill', required=False, dest='bill_type', metavar='T', help='Check bill type.')
-    parser.add_argument('-n', '--number', required=False, dest='bill_no', metavar='N', help='Specify the bill/customer number.')
+    parser.add_argument('-n', '--consumer_number', required=False, dest='bill_no', metavar='N', help='Specify the bill/customer number.')
     a = parser.parse_args()
 
     print('\n')

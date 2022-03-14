@@ -5,7 +5,7 @@ from setuptools import setup, find_packages
 
 setup(
     name="psg",
-    version="0.0.4",
+    version="0.0.5",
     keywords=["pakistan", "bills", "sui", "gas", "query", "search"],
 
     description="Pakistan SUI gas bills and tariff.",
